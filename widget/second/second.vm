@@ -1,0 +1,6 @@
+<button>Button</button>
+<div>
+  <span>颜色值（rgba）:</span>
+  <span id="colorInfo"></span>
+  <span id="colorBlock"></span>
+</div>
