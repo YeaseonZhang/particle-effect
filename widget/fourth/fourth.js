@@ -31,12 +31,6 @@ html2canvas(btn).then(canvas => {
       }
       count++;
     }
-
-    let bcr = btn.getBoundingClientRect();
-    let globalX = bcr.left + localX;
-    let globalY = bcr.top + localY;
-
-    createParticleAtPoint(globalX, globalY, rgbaColorArr);
   });
 });
 
@@ -120,8 +114,7 @@ function update() {
 
     // simple way to clean up if ths last particle is done animating
     if (i === particles.length - 1) {
-      let percent = (Date.now() - particles[i].startTime) / particles[i].animationDuration[i];
-
+      let percent = (Date.now() - particles[i].startTime) / particles[i].animationDuration;
       if (percent > 1) {
         particles = [];
       }

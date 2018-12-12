@@ -8,11 +8,13 @@ html2canvas(btn).then(canvas => {
   createParticleCanvas();
 
   btn.addEventListener('click', e => {
+    // 相对位置
     let localX = e.offsetX;
     let localY = e.offsetY;
     let rgbaColorArr = ctx.getImageData(localX, localY, 1, 1).data;
 
     let bcr = btn.getBoundingClientRect();
+    // 绝对位置
     let globalX = bcr.left + localX;
     let globalY = bcr.top + localY;
 
@@ -35,14 +37,14 @@ var ExplodingParticle = function () {
   this.life = 30 + Math.random() * 10;
   this.remainingLife = this.life;
 
-  this.draw = ctx => {
+  this.draw = ctx => { // canvas 2d 对象
     let p = this;
 
     if (this.remainingLife > 0 && this.radius > 0) {
-      ctx.beginPath();
-      ctx.arc(p.startX, p.startY, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${this.rgbArray[0]}, ${this.rgbArray[1]}, ${this.rgbArray[2]}, ${this.rgbArray[3]})`;
-      ctx.fill();
+      ctx.beginPath();  // 创建路径
+      ctx.arc(p.startX, p.startY, p.radius, 0, Math.PI * 2); // 画圆方法
+      ctx.fillStyle = `rgba(${p.rgbArray[0]}, ${p.rgbArray[1]}, ${p.rgbArray[2]}, ${p.rgbArray[3]})`;
+      ctx.fill(); // 填充当前图像
 
       // update
       p.remainingLife--;
@@ -54,8 +56,8 @@ var ExplodingParticle = function () {
 }
 
 var particles = [];
+
 function createParticleAtPoint(x, y, colorData) {
-  console.log('click');
   let particle = new ExplodingParticle();
   particle.rgbArray = colorData;
   particle.startX = x;
@@ -97,10 +99,11 @@ function update() {
 
   for(let i = 0; i < particles.length; i++) {
     particles[i].draw(particleCtx);
+    console.log(particles[0]);
 
     // simple way to clean up if ths last particle is done animating
     if (i === particles.length - 1) {
-      let percent = (Date.now() - particles[i].startTime) / particles[i].animationDuration[i];
+      let percent = (Date.now() - particles[i].startTime) / particles[i].animationDuration;
 
       if (percent > 1) {
         particles = [];
