@@ -1,7 +1,7 @@
-var btn = document.querySelector('button');
 var ctx;
-
+var btn = document.querySelector('button');
 var colorInfoEle = document.querySelector('#colorInfo');
+
 html2canvas(btn).then(canvas => {
   ctx = canvas.getContext('2d');
 
@@ -43,7 +43,6 @@ var ExplodingParticle = function () {
     y: -5 + Math.random() * 10
   };
 
-  // 粒子半径
   this.radius = 5 + Math.random() * 5;
 
   this.life = 30 + Math.random() * 10;
@@ -55,7 +54,12 @@ var ExplodingParticle = function () {
     if (this.remainingLife > 0 && this.radius > 0) {
       ctx.beginPath();
       ctx.arc(p.startX, p.startY, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${this.rgbArray[0]}, ${this.rgbArray[1]}, ${this.rgbArray[2]}, ${this.rgbArray[3]})`;
+      ctx.fillStyle = `rgba(
+        ${this.rgbArray[0]},
+        ${this.rgbArray[1]},
+        ${this.rgbArray[2]},
+        ${this.rgbArray[3]}
+      )`;
       ctx.fill();
 
       // update
@@ -114,6 +118,7 @@ function update() {
 
     // simple way to clean up if ths last particle is done animating
     if (i === particles.length - 1) {
+      btn.style.display = 'none';
       let percent = (Date.now() - particles[i].startTime) / particles[i].animationDuration;
       if (percent > 1) {
         particles = [];

@@ -1,6 +1,5 @@
-var btn = document.querySelector('button');
-
 var ctx;
+var btn = document.querySelector('button');
 
 var colorInfoEle = document.querySelector('#colorInfo');
 var colorBlock = document.querySelector('#colorBlock');

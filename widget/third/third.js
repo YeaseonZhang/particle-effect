@@ -70,15 +70,12 @@ function createParticleAtPoint(x, y, colorData) {
 var particleCanvas, particleCtx;
 
 function createParticleCanvas() {
-  // create our canvas
   particleCanvas = document.createElement('canvas');
   particleCtx = particleCanvas.getContext('2d');
 
-  //  size canvas
   particleCanvas.width = window.innerWidth;
   particleCanvas.height = window.innerHeight;
 
-  // position canvas
   particleCanvas.style.position = 'absolute';
   particleCanvas.style.top = '0';
   particleCanvas.style.left = '0';
@@ -101,7 +98,6 @@ function update() {
     particles[i].draw(particleCtx);
     console.log(particles[0]);
 
-    // simple way to clean up if ths last particle is done animating
     if (i === particles.length - 1) {
       let percent = (Date.now() - particles[i].startTime) / particles[i].animationDuration;
 
